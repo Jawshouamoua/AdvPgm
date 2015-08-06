@@ -1,0 +1,40 @@
+-abstract data type is the specification, algebraic data type is the representation.
+
+Abstract Data Type:
+	Stack:
+		isEmpty :: Stack -> Bool
+		push :: Stack -> Object -> Stack
+		pop :: Stack -> Stack
+		top :: Stack -> Object
+
+Algebraic Data Type:
+	data Stack a = 
+		Empty | Push (Stack a) a
+
+
+discriminated union retains the identity of the elements that are merged together (with tags in Hasekell).
+
+
+Functional programming is better for multi-threaded applications because there is no state.
+
+Algebraic data types allow us to statically type check functions before runtime:
+	division by zero example- can detect division by zero at compile time, but can't with other languages
+	like java.
+
+expressions have values, statments do not.
+
+
+expressions:
+5+3
+6*2
+f(5,2) (assuming this returns a value)
+ternary operator ? :
+
+
+statements:
+a = e
+if else
+if
+for()
+while()
+void f(...)

@@ -1,0 +1,70 @@
+3.1
+
+void printLots(List L, List P) {
+	int index = 0;
+	List<int>::iterator itr = L.begin();
+
+	while(!P.empty) {
+			
+		if(P.front() >= L.size())
+			cout << "Error: index from P exceeds the length of L" << endl;
+
+		else {
+			index = P.front();
+			P.pop_front();
+
+			while(index > 0) 
+				itr++;
+	
+			cout << *itr << endl;
+				
+		}
+	}
+}
+
+
+
+3.2
+
+a)
+swap(List<int>::iterator itr) {
+	List<int>::iterator temp;
+	temp = itr->next;
+	itr->next = itr->next->next ;
+	itr->next->next = temp;
+}
+	
+b)
+swap(List<int>::iterator itr) {
+	List<int>::iterator temp;
+	temp = itr
+
+
+3.4
+
+
+3.5
+
+
+3.6
+
+
+3.9
+
+
+3.10
+
+
+3.11
+
+
+3.22
+
+
+3.23
+
+
+
+3.29
+
+

@@ -1,0 +1,56 @@
+
+1.7
+a)
+
+Base Case: log 1 = 0, therefore log 1 < 1.
+
+Inductive Hypothesis: log k < k for all k > 0
+
+Recursive case:
+log (k+1) < k+1 for all k > 0
+Therefore, assuming base 2,
+1. let a = log(k+1), then 2^a = k+1 (rule of logs)
+2. log(k+1) < 2^a (substitution)
+3. log(k+1) < 2^log(k+1) (substitution)
+4. if we substitute log(k+1) with x, then we have:
+x < 2^x, which is always true for x > 0.
+
+b)
+log(A^B) = B log A
+log(A^B) = log(a1*a2*...*aB) = log(a1) + log(a2) + ... + log(aB) =
+B * log A
+
+1.8
+a) s = (1/4^0) + (1/4^1) + (1/4^2) + ... 
+s = 1 + 1/4 + 1/8 ....
+4*s = 4 + 1 + 1/4 + 1/8 ....
+4s - s = 4
+
+b)
+s = (0/4^0) + (1/4^1) + (2/4^2) + (3/4^3) + (4/4^4) + ....
+4*s = 0 + 1 + (2*4/4^2) + (4*3/4^3) + (4*4/4^4) ... 
+	= 0 + 1 + (2/4) + (3/4^2) + (4/4^3) + ... 
+4*s - s = 1 + 1/4 + 1/4^2 + 1/4^3 + 1/4^4 ...
+s is approxamately equal to 2 as it approaches inifinity.
+
+c) 
+s = (0^2/4^0) + (1^2/4^1) + (2^2/4^2) + (3^2/4^3)
+s = 0 + (1/4) + (2^2/4^2) + (3^2/4^3)
+s*4 = 0 + 1 + (2^2*4/4^2) + (3^2*4/4^3)
+s*4 - s = 1 + 3/4 + 5/4^2 + ....
+
+
+1.12
+a) (2-1) + (2*2-1) + (2*3-1) + (2*4-1) + ... + (2*n-1) =
+	summation(2i) - n 
+	(n(n+1)/2)*2 = n^2 + n - n = n^2
+
+b)
+summation(i^3) = 0^3 + 1^3 + 2^3 + 3^3 + 4^3
+summation(i)^2 = (1 + 2 + 3 + .. + n) * (1 + 2 + 3 + ... + n)
+			   = 1*1 + 1*2 + ... + 1*n + 2*1 + 2*2 + ... + 2*n + ... + n*n
+summation(i)   = n(n+1)/2 or n^2+n/2
+summation(i)^2 = n(n+1)/2 * n(n+1)/2 = n^4 + n^3 + n^3 + n^2/4
+			   = n^4 + 2n^3 + n^2/4
+			   = 
+

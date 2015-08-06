@@ -1,0 +1,207 @@
+4.1
+a) a, b, d, e, j, c, f are roots
+b) g, h, i, l, m, k are leaves
+
+4.2
+
+a)	A: has no parent
+	the rest of the nodes are children
+	no sibling
+	depth is 0 
+	height is 4
+
+	B: A is parent
+	D, E, G, H, I, J, L, M are children
+	C is sibling
+	depth is 1
+	height is 3
+
+	C: A is parent
+	F and K are children
+	B is sibling
+	depth is 1
+	height is 2
+
+	D: B is parent
+	G and H are children
+	E is sibling
+	depth is 2
+	height is 1
+	
+	E: B is parent
+	I, J, L, M are children
+	D is sibling
+	depth is 2
+	height is 2
+
+	F: C is parent
+	K is child
+	K sibling
+	depth is 2
+	height is 1
+
+	G: D is parent
+	no children
+	H is sibling
+	depth is 3
+	height is 0
+
+	H: D is parent
+	no children
+	G i sibling
+	depth is 3
+	height is 0
+
+	I: E is parent
+	no children
+	J is sibling
+	depth is 3
+	height is 0
+
+	J: E is parent
+	L and M are children
+	I is sibling
+	depth is 3
+	height is 1
+	
+	K: F is parent
+	no children
+	no siblings
+	depth is 3
+	height is 0
+	
+	L: J is parent
+	no children
+	M is sibling
+	depth is 4
+	height is 0
+
+	M: J is parent
+	no children
+	L is sibling
+	depth is 4
+	height is 0
+
+4.7
+
+If the leaves' depths hold this property: d1 < d2 < d3 < ... < dm
+then the summation will always be <= 1. 
+
+BC: 2^-1 = 0.5
+
+IH: 2^-k < 1
+ 
+RC: 2^-(k+1) < 2^-k
+
+Each iteration will yield a number smaller than the previous value in
+the sequence, and when summed together, will be less than 1.
+
+0.5 + 0.25 + 0.125 = 0.845
+
+4.9
+a)
+					3
+				  /   \
+				 1     4
+		          \      \
+				   2	  6
+						 /  \
+						5 	 9
+							/
+						   7
+
+b)
+					4
+				  /   \
+				 1     6
+				  \   /  \
+				   2 5    9
+						 /
+						7
+
+4.11
+
+
+
+4.19
+inserting 2,1,4,5,9,3,6,7 into an AVL tree.
+
+			2
+
+			2
+		  /
+		 1
+
+			2
+		  /   \
+		 1     4
+
+			2
+		  /   \
+		 1     4
+				\
+				 5
+
+			2
+		  /   \
+		 1     4
+				\
+				 5
+				  \
+				   9
+-----height invariant violated------
+			2
+		  /   \
+		 1     5
+			  /	 \
+		   	 4	  9
+
+			2
+		  /   \
+		 1     5
+			  /	 \
+		   	 4	  9
+			/
+		   3
+-----height invariant violated------
+			4
+		  /   \
+		 2     5
+	   /  \	  	 \
+	 1	   3 	  9
+			
+		   
+			4
+		  /   \
+		 2     5
+	   /  \	  	 \
+	 1	   3 	  9
+				 /
+				7
+-----height invariant violated------
+			4
+		  /   \
+		 2     7
+	   /  \	  /	 \
+	 1	   3 5	  9
+
+
+			4
+		  /   \
+		 2     7
+	   /  \	  /	 \
+	 1	   3 5	  9
+			  \
+			   6
+ 
+4.26
+
+
+4.27
+
+4.31
+
+4.43
+
+4.45
+

@@ -1,0 +1,220 @@
+
+<!-- saved from url=(0049)http://ada.evergreen.edu/~sherri/summer15/q1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title> Scala </title>
+<style>
+	p {
+		color: blue;
+	}
+</style>
+</head><body><h1> Scala </h1>
+<ul>
+<li>
+Define the terms:
+<ul>
+<li> modules </li>
+<p> modules are pieces of code that are meant to be reused by other pieces of code </p>
+
+<li> classes </li>
+<p> classes are the base blueprint for creating an object. However, there are abstract classes 
+	which are meant to be the "contract" for the actual implementation. Classes can have subclasses
+	which inherit from the parent class and there can be any number of subclasses inheriting. </p>
+
+<li> libraries </li>
+<p>	libraries are packages of code that can be imported into project to add more functionality to
+	code without having to write those functionalities yourself</p>
+
+<li> frameworks </li>
+<p>	a framework is everything that goes into making a programming language work. For java, the framework
+	would include the JVM, the compiler and typechecker, semantics, etc.</p>
+
+<li> processes </li>
+<p> A process is code that is meant to be executed. It can be large or small, but meant to handle some
+	kind of work designated by the programmer. </p>
+
+<li> web services </li>
+<p>	A web service is a piece of code that is meant to be run over the internet. They often give people
+	tools without the overhead of installing new software; they usually run on an internet browser.</p>
+</ul>
+Be sure to consider in what way each can be said to be a "component".
+</li>
+
+<li> Do the same for the terms:
+<ul>
+
+<li> aggregation </li>
+<p> aggregation allows objects to be combined to form a larger object with object composition. However,
+	aggregation does not imply ownership, so when the larger object is destroyed, the objects that were
+	aggregated may not necessarily be destroyed as well, unlike ordinary object composition.
+</p>
+
+<li> parameterization </li>
+<p>	This allows for the creation of generic types that have a type parameter instead of an explicit type.
+	Because of this, generic types can be reused without having to give specific implementations for a 
+	given type.
+</p>
+
+<li> inheritance </li>
+<p>	Inheritance allows reusability because an object can inherit all fields and members from another
+	object, creating the relationship of superclass and subclass, where the subclass inherits from the
+	superclass.
+</p>
+
+<li> remote invocation </li>
+<p>	This allows an object that has acquired the 'remote' of another object to call it's methods. So an
+	object can control another object.
+</p>
+
+<li> message passing </li>
+</ul>
+</li><li> What is component abstraction and composition? </li>
+<p>	component abstraction is where a component is boxed into a context, giving it a special type.
+</p>
+
+<li> What distinguishes object-oriented languages from functional languages? </li>
+<p>	An object-oriented language is based off the concepts of objects. Objects have properties and methods.
+	Objects are reusable and can have multiple instances of the same object with different identifiers.
+
+	A functional language is based off the concept of functions, where functions are first-class. This
+	allows the programmer to use concepts in discrete math to produce code, like composition, mapping,
+	and includes a different kind of type system.
+</p>
+
+<li> In what way might these contribute to scaleability? (Hold this question until the end of the paper.) </li>
+<p> 
+</p>
+
+<li>What are abstract type definitions ? </li>
+<p>	An abstract type definition defines the fields that will be used, but don't give an implementation
+	of those fields.
+</p>
+
+<li> What are <i>path dependent types</i> ? </li>
+<p> Path dependent types give the Scala language "type safety". It allows the compiler to catch errors 
+	in types that would normally occur at runtime. When one programs nested types, normal compilers aren't
+	able to determine the subtypes until runtime. With path-dependent types, the compiler can infer types
+	by looking at the path of the type. This prevents type problems at runtime. </p>
+
+<li> What are <i>modular mixin compositions </i> ? </li>
+<p>	Modular mixin compositions are similar to Java interfaces, but they allow the implementation of
+	the abstract methods whereas Java interfaces can only provide the signature. Mixins can be reused
+	by multiple objects without the problems of multiple inheritance. How this is acheived, I'm not sure.
+</p>
+
+<li> What is a singleton object and why might it be useful? </li>
+<p>	Because everything is an object in Scala, there cannot be static members. Instead, singleton objects
+	are created that act as static members, being created once to hold information. This is useful for 
+	creating an algebraic datatype and defining the empty data type.
+</p>
+
+<li> What distinguishes an expression from a statement? </li>
+<p>	There is no distinction. Scala treats statements and expressions as the same and every function
+	returns a value</p>
+
+<li> What is the difference between a static and a dynamic member? </li>
+<p>	Static members have a set type that is set before compile time. Dynamic members don't have a set type
+	until runtime.</p>
+
+<li> What is the difference between <i>anyRef</i> and <i>anyVal</i>? </li>
+<p>	anyRef is a class that contains all reference classes. This is the same as java.lang.Object and all
+	the references contained in that class.
+
+	anyVal is a class that contains all values. This includes number types (int, double, float, etc), unit
+	(or null), chars, and booleans. </p>
+
+<li> What does it mean to say that lists are covariant? (This may be hard to answer!) </li>
+
+<li> What are the two different notions of equality mentioned on p 3? </li>
+<p>	 For value types, equality works naturally return 'True' or 'False' depending on the expression.
+
+	For reference types, equality works the same as .equals() method from the Java.lang.Object library.
+</p>
+
+<li> What is boxing and unboxing? </li>
+<p>	Boxing is the act of abstracting functions or objects into a fancy type. Unboxing is removing the fancy
+	type and applying the function in a context. (Not sure about this, mostly taken from Haskell).
+</p>
+
+<li> How does the abstract class <i>Nat</i> work? The class <i>Zero</i>? The class <i>Succ</i> ? Go through an example. </li>
+<p>	Nat is provides what is needed to implement the reproduction of natural numbers, defining types of 
+	the implementations. The class/object Zero is a singleton object to represent zero, since zero is 
+	a different from the rest of the natural numbers in that it provides the basis for counting. Succ is
+	the successor of number which allows for counting. For example, Succ(Zero) is 1 ans Succ(Succ(Zero))
+	is 2. Any number of Succ can be added with is similar to adding 1 each time a new Succ is added.
+</p>
+
+<li> How does the list cons operator work? </li>
+<p>	The list cons operator is right-associative. Because the type of cons is <Type> -> Array<Type>,
+	the cons operator must take an object of a type and a list of objects of a type.
+
+<li> What is the significance of the <i>=&gt;</i> operator? Why are the arguments unevaluated? </li>
+<p> This operator signifies an unevaluated function. This is a function that is waiting for an
+	argument before it can be evaluated. </p>
+
+<li> rewrite the celsius class in Java with explicit getters/setters </li>
+<p> public class Celsius { <br>
+	&emsp;private int degree = 0;<br>
+	&emsp;public Celsius(int d) { <br>
+	&emsp;&emsp;degree = d;<br>
+	&emsp;} <br>
+	&emsp; int getDeg() { <br>
+	&emsp;&emsp;return degree; <br>
+	&emsp;} <br>
+	&emsp;setDeg(int d) { <br>
+	&emsp;&emsp;if(d >= -273) <br>
+	&emsp;&emsp;&emsp; degree = d;<br>
+	&emsp;} <br>
+	}
+	
+<li> How does <i>exists</i> and <i>forall</i> on p 5 work? </li>
+<p> exists takes two arguments, a list of type T and a predicate function. An integer i is set to zero
+	for the while-loop variable. Then, as long as i is less than the list's length (xs.length) and the
+	predicate function of p(xs(i)) is false, increment i by one. When the loop terminates, the value of
+	(i < xs.length) will either be true of the loop terminated before reaching the end of the list or
+	be false if the loop reached the end of the list.
+	
+	forall has the same arguments as exists. However, the predicate function is negated and this is
+	passed to the exists function. The exists function is also negated, so that the return value of
+	exists is whether the whole array agrees with the predicate function. The predicate has to be 
+	negated so that the exists can be checked on all the elements in the array.
+</p>	
+
+<li> How about the alternate definition of <i>forall</i> on p 6?  </li> 
+<p> This forall function does the same work, but is minimized to one line of code, where all the work
+	is being handled in the one line. Inside the arguments for exists, an anonymous function is declared
+	removing the need to create an whole new function.
+</p>
+
+<li> How does the <i>sqrts</i> function work? (Requires understanding of <i>map</i>)</li>
+<p> The function sqrts takes a list of doubles and returns a list of doubles. First, every element that
+	is less than zero is removed from the lists to ensure were not taking the square root of a negative
+	number (imaginary numbers), then the square root function is applied to all the elements in the 
+	remaining list with the function map. 
+</p>
+<li>
+
+What is the difference between functional abstraction and abstract members? 
+</li>
+<p>	
+
+</p>
+<li> What is the problem in Section 5 dealing with covariance and <i>GenCell</i>? </li>
+<p>
+	A gencell[String] is a not a special instance of gencell[Any] so there are operation you can do to
+	a gencell[Any] that you cannot do with a gencell[String] and vice-versa. This would cause a type
+	error at run time. 
+</p>
+<li> Can you think of a problem where covariant lists would lead to problems if we could update the lists? </li>
+<li> Why is the first definition of prepend a problem and the second one ok? </li>
+<li> See if you can untangle the <i>SubjectObserver</i> example and the use of a <i>selftype</i> </li>
+<li> What is the difference between generics and abstract types? </li>
+<li> What is a <i>mixin</i>? What does the object <i>Test</i> on p 11 look like?</li>  
+<li> What is object-oriented deomposition? How would we add a new method? Which classes would you have to "touch"? </li>
+<li>
+What is functional decomposition? Algebraic datatypes? Pattern matching? </li>
+<li> Go over the functional implementation of Term. This solves one problem but introduces another. What happens if we add a new kind of term? (a new case?) Would it be easier in the object-oriented decomposition?  </li>
+<li> We'll skip section 8, 9 and 10! </li>
+<li> You can try some of the examples in the <i>Scala by example</i> link. Start scala on ada by just typing <i>scala</i>.
+</li></ul>
+
+
+</body></html>

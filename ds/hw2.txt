@@ -1,0 +1,42 @@
+
+2.1
+37 = O(1)
+sqrt(N), N log N, N log(log(N)) = O(log(n))
+N^2 log(N), N log^2(N) = O(log^2(N))
+N, 2/N = O(N)
+N^1.5, N^2, N^3 = O(N^2)
+2^N = O(2^N)
+
+2.2
+a) False
+b) False
+c) False
+d) True
+
+2.3
+N log N
+
+2.7
+1a)4n + 1
+
+2a) 4n^2 + 1
+
+3a) 5n^2 * n = 5n^3
+
+4a) 3 + 4n*(n+1)/2
+
+5a) n * 
+
+2.14
+
+2.15
+
+2.26
+
+2.28
+
+
+2.31
+
+
+

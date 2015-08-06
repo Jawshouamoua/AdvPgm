@@ -1,0 +1,611 @@
+1.
+
+Base Case:
+A tree with a height of 0 has 1 node.
+
+Inductive Hypothesis:
+At height k, a binary tree will have 2^k leaf nodes.
+2^0 = 1, 2^1 = 2, 2^2 = 4 ...
+
+For the total amount of nodes given a height of k,
+nodes = summation(2^(k-1)) + 2^k 
+2^0 + 2^1 + 2^2 + ... 2^(k-1) + 2^k = summation(2^k) from k to n where k=0. 
+
+
+
+2. 
+
+Inorder BCAFEDIHGJ
+
+		x
+	  /
+	B
+
+		x
+	  /
+	B
+	 \
+      C
+
+
+		A
+	  /
+	B
+	 \
+      C
+
+
+		A
+	  /   \
+	B       x
+	 \     /
+      C   x
+    	 /
+		F
+
+
+		A
+	  /   \
+	B       x
+	 \     /
+      C   E
+    	 /
+		F
+
+		A
+	  /   \
+	B       D
+	 \     /
+      C   E
+    	 /
+		F
+
+
+		A
+	  /   \
+	B       D
+	 \     /  \
+      C   E    x
+    	 /    /
+		F    x
+            /
+           I
+
+		A
+	  /   \
+	B       D
+	 \     /  \
+      C   E    x
+    	 /    /
+		F    H
+            /
+           I
+
+		A
+	  /   \
+	B       D
+	 \     /  \
+      C   E    G
+    	 /    /
+		F    H
+            /
+           I
+
+
+		A
+	 /     \
+	B       D
+	 \     /  \
+      C   E    G
+    	 /    / \
+		F    H   J
+            /
+           I
+
+
+
+3.
+
+Keys to insert:7,42,25,73,14,38,8,22,34,11
+Keys to delete: 73, 22
+											D	D
+0 | 					38	38	38	38	38	38	38
+1 | 				14	14	14	14	14	14	14	14
+2 | 									11		
+3 | 	42	42	42	42	42	42	42	42	42	42	42
+4 |
+5 |
+6 |
+7 | 7	7 	7	7	7	7	7	7	7	7	7	7
+8 | 			73	73	73	73	73	73	73	8	8
+9 | 						8	8	8	8	22	34
+10| 							22	22	22	34	
+11| 								34  34	11	11
+12| 		25	25	25	25	25	25	25	25	25	25
+
+
+4.
+Declaration:
+int computeS(TreeNode & n) ;
+
+int computeS(TreeNode & n, int c) {
+	if(n->leftChild == null && n->rightChild == null) {
+		n->s = c;
+		return c++;
+	}
+
+	if(n->leftChild == null)
+		n->s = computeS(n->rightChild, 0) ;
+
+	else if(n->rightChild == null)
+		n->s = computeS(n->leftChild, 0);
+
+	else {
+		int c1 = computeS(n->leftChild, 0);
+		int c2 = computeS(n->rightChild, 0);
+		c = min(c1,c2); 
+		n->s = c;
+	}
+
+	return c++;
+
+}
+
+Function call:
+computeS(root, 0) ;
+
+Helper function:
+int min(int c1, int c2) {
+	if(c1 < c2)
+		return c1;
+	else
+		return c2;
+}
+
+Complexity of computeS():
+T(number of nodes N) = 
+N == 1 = 4			 = 4
+N == 2 = 4 + 6 		 = 10
+N == 3 = 4 + 4 + 10	 = 18
+
+Node with no children = T(4)
+Node with 1 child 	  = T(6)
+Node with 2 children  = T(10)
+
+O(N) = 4(2^log(N)) + 10(N - 2^log(N)) where
+log(N) is height of a tree
+2^log(N) is maximum number of leaf nodes
+4(2^log(N)) is running time for nodes with no children (leaf nodes)
+10(N - 2^log(N)) is worst case running time for nodes with 1 or 2 children
+
+*I might have interpreted this question wrong, but the efficiency of this
+algorithm is exponential (really bad). However, this algorithm has to visit
+every node to compute the s value for each node which accounts for the 
+exponential time.
+
+
+5.
+
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           10    27  40  60           
+           / \  /    /   / \
+          5  15 26  35   55  70          
+             /
+            12
+ 
+{Node: balance factor}
+h = 4
+12: 0
+
+h = 3
+15: +1
+5:  0
+26: 0
+35: 0
+55: 0
+70: 0
+
+h = 2
+10: +1
+27: +1
+40: +1
+60: 0
+
+h = 1
+25: +1
+50: 0
+
+h = 0 
+30: +1
+
+insert 13:
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           10    27  40  60           
+           / \  /    /   / \
+          5  15 26  35   55  70          
+             /
+            12
+			  \
+			  13
+
+rebalance because height invariant violated with node 10.
+
+single rotation:
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           10    27  40  60           
+           / \  /    /   / \
+          5  13 26  35   55  70          
+             /\
+            12 15
+
+
+insert 14:
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           10    27  40  60           
+           / \  /    /   / \
+          5  13 26  35   55  70          
+             /\
+            12 15
+			   /
+			  14
+
+rebalance because height invariant violated with node 10:
+
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           10    27  40  60           
+           / \  /    /   / \
+          5  13 26  35   55  70          
+             /\
+            12 15
+
+double roation:
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           12    27  40  60           
+           / \   /   /   / \
+         10  13 26  35  55  70          
+         /     \
+        5      15
+			  /
+			 14
+
+rebalance because height invariant violated with node 13;
+
+single rotation:
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           12    27  40  60           
+           / \   /    /   / \
+         10  14 26  35   55  70          
+         /   / \
+        5   13  15
+
+insert 36:
+
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           12    27  40  60           
+           / \   /    /   / \
+         10  14 26  35   55  70          
+         /   / \     \
+        5   13  15    36
+
+rebalance because height invariant violated with node 40:
+
+single roation:
+				 30                        
+                /  \                      
+               /    \                   
+              /      \
+             25       50                
+            /  \      /  \              
+           12    27  36    60           
+           / \   /   / \   / \
+         10  14 26  35 40 55  70          
+         /   / \     
+        5   13  15    
+
+
+6.
+
+		10
+
+		9,10
+
+		8,9,10
+
+		 9
+	  /     \ 	
+    7,8      10
+
+
+		 9
+	  /     \ 	
+    6,7,8    10
+
+		7,9
+	  /  |  \ 	
+    5,6  8   10
+
+
+	     7,9
+	  /    |  \ 	
+    4,5,6  8   10
+
+	     5,7,9
+	  /  |  |  \ 	
+    3,4  6  8  10
+
+	     5,7,9
+	  /  |  |  \ 	
+  2,3,4  6  8  10
+
+		   7
+		/    \
+	  3,5	  9
+     / | \   / \
+  1,2  4  6 8   10
+
+Delete 10,9,8,7:
+
+		3,5,7
+	 /  |  |  \
+   1,2  4  6   8,9
+
+
+		3,5,7
+	 /  |  |  \
+   1,2  4  6   8
+
+
+		3,5
+	 /   |   \
+   1,2   4    6,7
+
+		3,5
+	 /   |   \
+   1,2   4    6
+
+7.
+a)
+				15
+			    /
+			   8
+            /     \
+          4        14
+        /  \       /
+       2    6     12 
+     / \   / \    / \
+    1   3 5   7  10  13
+                /  \
+               9    11
+---------------------------
+				 14
+			    /  \ 
+			   8   15
+            /    \
+          4       12
+        /  \      / \
+       2    6    10  13 
+     / \   / \   / \ 
+    1   3 5   7 9   11
+---------------------------
+			   13
+			  /  \
+   		    12    14
+     	   /        \
+          8          15
+        /  \  
+      4     10
+     / \   /  \
+    2   6 9   11
+   / \ / \
+  1  3 5  7
+--------------------------
+   		    12 
+     	   /  \
+          8    13
+        /   \     \
+      4      10    14
+     / \    /  \     \ 
+    2   6  9   11     15
+   / \ / \
+  1  3 5  7
+
+b)
+
+		1
+		 \
+		  8
+	   /     \
+      2       12
+       \      / \
+       4     10  14
+      / \    / \   \ 
+     3   6  9  11   15
+		/ \
+       5   7
+-----------------------------
+
+		5
+      /   \
+     1     8
+     \      \
+      2      12
+      \      / \ 
+       4    10  14
+      /\    / \  / \
+     3  6  9  11 13 15
+         \
+          7
+------------------------------ 
+
+            8
+         /     \
+       5        12
+     /          / \
+   1           10  14
+    \         / \  / \
+     2       9  11 13 15
+      \
+       4
+      / \
+     3   6
+          \
+           7
+-------------------------------
+
+			7
+		 /     \
+       5         8
+      /           \
+     2            12
+   /  \          /  \
+  1    6        10   14
+      /        / \  /  \
+     4        9  11 13  15
+    /
+   3
+--------------------------------
+
+             12
+           /    \
+         8       14
+       /        /   \ 
+      7        13    15
+     /        / 
+    5        10    
+   /        /  \
+  2        9    11
+ / \
+1   6
+   / 
+  4
+ /
+3
+
+8.
+a)
+
+bool equal(MyList a, MyList b) {
+	MyList::iterator itr1;
+	MyList::iterator itr2;
+
+	itr1 = a.iterator();
+	itr2 = b.iterator();
+
+	while(itr1.hasNext() && itr2.hasNext()) {
+		if(*itr1 != *itr2)
+			return false;
+		else {
+			itr1.next();
+			itr2.next();
+		}
+	}
+
+	return true;
+}
+
+b)
+T(number of inputs N) = 
+N == 0		= 6
+N == 1		= 9
+N >  2		= 5N + 4
+
+There are 4 initial steps taken in the beginning of the function; creating both iterators
+and assigning the iterators to each list. The while loop adds 5 steps for each input N.
+
+9.
+a) 
+
+5x5 X-matrix
+
+1	2	3	4	5
+
+0	6	0	7	0
+
+0	0	8	0	0
+
+0	9	0	10	0
+
+11	12	13	14	15
+
+
+xMatrix[] = {1,2,3,4,5,0,6,0,7,0,0,0,8,0,0,0,9,0,10,0,11,12,13,14,15}
+xMatrix[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+
+b)
+int get(int i, int j) {
+
+	int xLength ;
+
+	if(i >= n || j >= n) 
+		return zero;
+
+	if(n == 0) 
+		return zero;
+	else if(n%2==0) 
+		xLength = 2 * n + (4 * ((n > 3) ? n : 0) - 3))	
+	else
+		if(n == 1)
+			xLength = 1;
+		else
+			xLength = 2 * n + (1 + 4 * ((n > 4) ? n : 0) - 4)
+
+
+	if(i == 0) 
+		return xMatrix[j];
+
+	if(i == n)
+		return xMatrix[j + (xLength - n - 1)];
+
+	if(i == j) 
+		return xMatrix[n + i + (i < (n/2)) ? 0 : 1];
+
+	if(i + j == (n - 1)) 
+		return xMatrix[n + i + (j < (n/2)) ? 0 : 1];
+		
+		
+	return zero;
+}
+
+
+
+

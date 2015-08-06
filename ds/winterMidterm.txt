@@ -1,0 +1,204 @@
+
+
+1.
+
+				.
+			/		\
+		   a		 b
+		  /			  \
+		 a			   b
+		/ \			   |
+	   a   b		   b
+	  / \   \  		   |
+     a   b   b		   a
+	 |   |   |         |
+	 a   a   b		   a
+	 |   |   |		   |
+	 b   a   b		   a
+     |   |   |    	   | 
+	 a   b	 a		   b
+     |   |   |		   |
+	 a   b   a		   b
+     |   |   |    	   |
+	 a   \1  a		   \2
+     |       | 		   |
+     \3		 \4
+
+2.
+
+Starting with an intially empty heap, inserting keys 1 through 2^(k-1) yields
+a perfectly balanced tree.
+
+The number of nodes in a perfectly balance tree is 2^(k-1) nodes. Because of
+the heap ordering property that each child must be greater than its parent 
+node, then each element that is inserted is merged into the right subtree. 
+When the right subtree's null path length becomes greater than that of the
+left subtree, then the root of each subtree is swapped so that leftist property
+is maintained. Then each element remaining is continued to be merged into the 
+right subtree until the tree is perfectly balanced. 
+
+
+3.
+As with the leftist heap, inserting keys 1 through 2^(k-1) will result in a 
+perfectly balanced tree.
+
+Since the elements are inserted in order, then the node to be inserted always
+occurs at the largest depth of the right subtree. After the element is inserted
+then a swap occurs at the parent of the node inserted, and then recursively
+swapped in the parent node. When the 2^(k-1) element is inserted, then the 
+tree will be expected to be full after the swaps happen.
+
+
+4.
+
+
+void merge( BinomialQueue & rhs )
+{
+	if( this == &rhs ) 	// Avoid aliasing problems
+		return;
+	int oldCurrentSize = rhs.currentSize;
+	currentSize += rhs.currentSize;
+
+	if( currentSize > capacity( ) )
+	{
+		int oldNumTrees = theTrees.size( );
+		int newNumTrees = max( theTrees.size( ), rhs.theTrees.size( ) ) + 1;
+		theTrees.resize( newNumTrees );
+		for( int i = oldNumTrees; i < newNumTrees; ++i )
+			theTrees[ i ] = nullptr;
+	}
+	BinomialNode *carry = nullptr;
+	for( int i = 0, j = 1; j <= currentSize; ++i, j *= 2 )
+	{
+		/* modified code */
+		BinomialNode *t1 = oldCurrentSize > rhs.currentSize ? theTrees[ i ] : rhs.theTrees[i];
+		BinomialNode *t2 = rhs.currentSize > currentSize ? rhs.theTrees[i] : theTrees[i];
+
+		/* added code */
+		if(t2 == NULL && carry == NULL)
+			break;
+
+		int whichCase = t1 == nullptr ? 0 : 1;
+		whichCase += t2 == nullptr ? 0 : 2;
+		whichCase += carry == nullptr ? 0 : 4;
+
+		switch( whichCase )
+		{
+		case 0: /* No trees */
+
+		case 1: /* Only this */
+			break;
+
+		case 2: /* Only rhs */
+			theTrees[ i ] = t2;
+			rhs.theTrees[ i ] = nullptr;
+			break;
+
+		case 4: /* Only carry */
+			theTrees[ i ] = carry;
+			carry = nullptr;
+			break;
+
+		case 3: /* this and rhs */
+			carry = combineTrees( t1, t2 );
+			theTrees[ i ] = rhs.theTrees[ i ] = nullptr;
+			break;
+
+		case 5: /* this and carry */
+			carry = combineTrees( t1, carry );
+			theTrees[ i ] = nullptr;
+			break;
+
+		case 6: /* rhs and carry */
+			carry = combineTrees( t2, carry );
+			rhs.theTrees[ i ] = nullptr;
+			break;
+
+		case 7: /* All three */
+			theTrees[ i ] = carry;
+			carry = combineTrees( t1, t2 );
+			rhs.theTrees[ i ] = nullptr;
+			break;
+		}
+	}
+
+	for( auto & root : rhs.theTrees )
+	root = nullptr;
+	rhs.currentSize = 0;
+}				
+
+5.
+1. v = {K}, s1 = {G,I,K}, s2 = {N,V,S,S,W,Q}
+
+
+6.
+a)
+Sorting 4 numbers has a total of 4! or 24 combination. Doing 1 comparison would split the remaining 
+combinations in half, leaving 12 possible solutions. Applying another comparison will halve the 
+combinations in half, leaving 6, and then 3, and then 2, and then 1, since we round up because we can't
+discard data away. There were 5 comparisons made.
+
+				{b<d<a<c}	{c<a<b<d}
+				{b<d<c<a}	{c<a<d<b}
+				{b<a<d<c}	{c<b<d<a}
+				{b<a<c<d}	{c<b<a<d}
+				{b<c<a<d}	{c<d<a<b}
+				{b<c<d<a}	{c<d<b<a}
+
+				{d<b<a<c}	{a<b<c<d}
+				{d<b<c<a}	{a<b<d<c}
+				{d<a<b<c}	{a<c<b<d}
+				{d<a<c<b}	{a<c<d<b}
+				{d<c<a<b}	{a<d<b<c}
+				{d<c<b<a}	{a<d<c<b}
+		
+
+b)
+
+void sort(vector<Comparable> & list) {
+	if(list.size() == 4) {
+		vector<Comparable> lTemp;
+		vector<Comparable> rTemp;
+		
+		while(!list.empty) {
+			lTemp.push_back(list.back());
+			rTemp.push_back(list.back());
+			lTemp.pop_back;
+			rTemp.pop_back;
+		}
+
+		if(lTemp[0] < lTemp[1]) {
+			int temp = lTemp[0];
+			lTemp[0] = lTemp[1];
+			lTemp[1] = temp;
+		}
+	
+		if(rTemp[0] < rTemp[1]) {
+			int temp = rTemp[0];
+			rTemp[0] = rTemp[1];
+			rTemp[1] = temp;
+		}
+		
+		while(!lTemp.empty() || rTemp.empty()) {
+			if(lTemp.front() < rTemp.front()) {
+				list.push_back(lTemp.front();
+				lTemp.erase(lTemp.begin());
+			}
+			else {
+				list.push_back(rTemp.front());
+				rTemp.erase(rTemp.begin());
+			}	
+		}
+		while(!lTemp.empty()) {
+			list.push_back(lTemp.front);
+			rTemp.erase(lTemp.begin());
+		}
+		while(!rTemp.empty()) {
+			list.push_back(rTemp.front());
+			rTemp.erase(rTemp.begin());
+		}
+	}
+}
+
+
+
